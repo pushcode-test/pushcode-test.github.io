@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>PUSHCODE Test Page</title>
+    <script defer src="https://www.pushcode.jp/dist/js/pushcode.js"></script>
+</head>
+<body>
+    <h1>PUSHCODE Test Page</h1>
+    <button id="push">プッシュ通知を受け取る</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded');
+            if (PushCode.isSupport()) {
+                console.log('supported');
+                PushCode.init({ domainToken: '57cfcbe97e2fff19b201a8baa2dac687bd5b97a7c9164e70c96963d428cbd456', userid: '' });
+                document.querySelector('#push').addEventListener('click', () => PushCode.requestPermission());
+            } else {
+                const button = document.querySelector('#push');
+                button.disabled = true;
+                button.innerText += ' (プッシュ通知非対応ブラウザです)';
+                console.log('not supported');
+            }
+        });
+    </script>
+</body>
+</html>
